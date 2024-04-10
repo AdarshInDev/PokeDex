@@ -6,6 +6,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // PokeRepo().getPokemon();
     return Scaffold(
       appBar: AppBar(
         title: Center(

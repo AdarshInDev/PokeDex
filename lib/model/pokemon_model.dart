@@ -1,603 +1,280 @@
-// ignore_for_file: constant_identifier_names, unnecessary_new
+//
+// To parse this JSON data, do
+//
+//     final pokeModel = pokeModelFromJson(jsonString);
 
-// class PokeModel {
-//   int id;
-//   Name name;
-//   List<Type> type;
-//   Base? base;
-//   String species;
-//   String description;
-//   Evolution evolution;
-//   Profile profile;
-//   Image image;
+import 'dart:convert';
 
-//   PokeModel({
-//     required this.id,
-//     required this.name,
-//     required this.type,
-//     this.base,
-//     required this.species,
-//     required this.description,
-//     required this.evolution,
-//     required this.profile,
-//     required this.image,
-//   });
+PokeModel pokeModelFromJson(String str) => PokeModel.fromJson(json.decode(str));
 
-// }
-
-// class Base {
-//   int hp;
-//   int attack;
-//   int defense;
-//   int spAttack;
-//   int spDefense;
-//   int speed;
-
-//   Base({
-//     required this.hp,
-//     required this.attack,
-//     required this.defense,
-//     required this.spAttack,
-//     required this.spDefense,
-//     required this.speed,
-//   });
-// }
-
-// class Evolution {
-//   List<List<String>>? next;
-//   List<String>? prev;
-
-//   Evolution({
-//     this.next,
-//     this.prev,
-//   });
-// }
-
-// class Image {
-//   String sprite;
-//   String thumbnail;
-//   String? hires;
-
-//   Image({
-//     required this.sprite,
-//     required this.thumbnail,
-//     this.hires,
-//   });
-// }
-
-// class Name {
-//   String english;
-//   String japanese;
-//   String chinese;
-//   String french;
-
-//   Name({
-//     required this.english,
-//     required this.japanese,
-//     required this.chinese,
-//     required this.french,
-//   });
-// }
-
-// class Profile {
-//   String height;
-//   String weight;
-//   List<Egg>? egg;
-//   List<List<String>> ability;
-//   Gender gender;
-
-//   Profile({
-//     required this.height,
-//     required this.weight,
-//     this.egg,
-//     required this.ability,
-//     required this.gender,
-//   });
-// }
-
-// enum Egg {
-//   AMORPHOUS,
-//   BUG,
-//   DITTO,
-//   DRAGON,
-//   FAIRY,
-//   FIELD,
-//   FLYING,
-//   GRASS,
-//   HUMAN_LIKE,
-//   MINERAL,
-//   MONSTER,
-//   UNDISCOVERED,
-//   WATER_1,
-//   WATER_2,
-//   WATER_3
-// }
-
-// enum Gender {
-//   GENDERLESS,
-//   THE_001000,
-//   THE_0100,
-//   THE_1000,
-//   THE_100000,
-//   THE_125875,
-//   THE_250750,
-//   THE_2575,
-//   THE_500500,
-//   THE_5050,
-//   THE_7525,
-//   THE_875125
-// }
-
-// enum Type {
-//   BUG,
-//   DARK,
-//   DRAGON,
-//   ELECTRIC,
-//   FAIRY,
-//   FIGHTING,
-//   FIRE,
-//   FLYING,
-//   GHOST,
-//   GRASS,
-//   GROUND,
-//   ICE,
-//   NORMAL,
-//   POISON,
-//   PSYCHIC,
-//   ROCK,
-//   STEEL,
-//   WATER
-// }
-
-// import 'dart:convert';
-
-// class PokeModel {
-//   List<Type>? get type => json['type'] != null ? List<Type>.from(json['type'].map((e) => Type.fromString(e))) : null;
-//   int? id;
-//   Name? name;
-//   List<Type>? type;
-//   Base? base;
-//   String? species;
-//   String? description;
-//   Evolution? evolution;
-//   Profile? profile;
-//   Image? image;
-
-//   factory PokeModel.fromJson(Map<String, dynamic> json) {
-//     return PokeModel(
-//       id: json['id'],
-//       name: Name.fromJson(json['name']),
-//       type: List<Type>.from(json['type'].map((e) => Type.fromString(e))),
-//       base: Base.fromJson(json['base']),
-//       species: json['species'],
-//       description: json['description'],
-//       evolution: Evolution.fromJson(json['evolution']),
-//       profile: Profile.fromJson(json['profile']),
-//       image: Image.fromJson(json['image']),
-//       type:
-//     );
-//   }
-// }
-
-// class Name {
-//   String english;
-//   String japanese;
-//   String chinese;
-//   String french;
-
-//   Name({
-//     required this.english,
-//     required this.japanese,
-//     required this.chinese,
-//     required this.french,
-//   });
-
-//   factory Name.fromJson(Map<String, dynamic> json) {
-//     return Name(
-//       english: json['english'],
-//       japanese: json['japanese'],
-//       chinese: json['chinese'],
-//       french: json['french'],
-//     );
-//   }
-// }
-
-// class Type {
-//   String? name;
-
-//   factory Type.fromString(String type) {
-//     switch (type) {
-//       case 'bug':
-//         return Type.BUG;
-//       case 'dark':
-//         return Type.DARK;
-//       case 'dragon':
-//         return Type.DRAGON;
-//       case 'electric':
-//         return Type.ELECTRIC;
-//       case 'fairy':
-//         return Type.FAIRY;
-//       case 'fighting':
-//         return Type.FIGHTING;
-//       case 'fire':
-//         return Type.FIRE;
-//       case 'flying':
-//         return Type.FLYING;
-//       case 'ghost':
-//         return Type.GHOST;
-//       case 'grass':
-//         return Type.GRASS;
-//       case 'ground':
-//         return Type.GROUND;
-//       case 'ice':
-//         return Type.ICE;
-//       case 'normal':
-//         return Type.NORMAL;
-//       case 'poison':
-//         return Type.POISON;
-//       case 'psychic':
-//         return Type.PSYCHIC;
-//       case 'rock':
-//         return Type.ROCK;
-//       case 'steel':
-//         return Type.STEEL;
-//       case 'water':
-//         return Type.WATER;
-//       default:
-//         throw ArgumentError('Invalid type: $type');
-//     }
-//   }
-// }
-
-// class Base {
-//   int? hp;
-//   int? defense;
-//   int? attack;
-//   int? spAttack;
-//   int? spDefense;
-//   int? speed;
-
-//   factory Base.fromJson(Map<String, dynamic> json) {
-//     return Base(
-//       hp: json['hp'],
-//       attack: json['attack'],
-//       defense: json['defense'],
-//       spAttack: json['sp-attack'],
-//       spDefense: json['sp-defense'],
-//       speed: json['speed'],
-//     );
-//   }
-// }
-
-// class Evolution {
-//   List<List<String>>? next;
-//   List<String>? prev;
-
-//   factory Evolution.fromJson(Map<String, dynamic> json) {
-//     return Evolution(
-//       next: json['next'] != null
-//           ? List<List<String>>.from(json['next'].map((e) => e.toString()))
-//           : null,
-//       prev: json['prev'] != null
-//           ? List<String>.from(json['prev'].map((e) => e.toString()))
-//           : null,
-//     );
-//   }
-// }
-
-// class Profile {
-//   String? height;
-//   String? weight;
-//   List<Egg>? egg;
-//   List<List<String>>? ability;
-//   Gender? gender;
-
-//   factory Profile.fromJson(Map<String, dynamic> json) {
-//     return Profile(
-//       height: json['height'],
-//       weight: json['weight'],
-//       egg: json['egg'] != null
-//           ? List<Egg>.from(json['egg'].map((e) => Egg.values
-//               .firstWhere((element) => element.index == int.parse(e))))
-//           : null,
-//       ability: json['ability'] != null
-//           ? List<List<String>>.from(
-//               json['ability'].map((e) => e.toString().split(',')))
-//           : null,
-//       gender: json['gender'] != null
-//           ? Gender.values.firstWhere(
-//               (element) => element.index == int.parse(json['gender']))
-//           : null,
-//     );
-//   }
-// }
-
-// class Image {
-//   String? sprite;
-//   String? thumbnail;
-//   String? hires;
-
-//   factory Image.fromJson(Map<String, dynamic> json) {
-//     return Image(
-//       sprite: json['sprite'],
-//       thumbnail: json['thumbnail'],
-//       hires: json['hires'] ?? null,
-//     );
-//   }
-// }
-
-// enum Egg {
-//   AMORPHOUS,
-//   BUG,
-//   DITTO,
-//   DRAGON,
-//   FAIRY,
-//   FIELD,
-//   FLYING,
-//   GRASS,
-//   HUMAN_LIKE,
-//   MINERAL,
-//   MONSTER,
-//   UNDISCOVERED,
-//   WATER_1,
-//   WATER_2,
-//   WATER_3
-// }
-
-// enum Gender {
-//   GENDERLESS,
-//   THE_001000,
-//   THE_0100,
-//   THE_100000,
-//   THE_125875,
-//   THE_250750,
-//   THE_2575,
-//   THE_500500,
-//   THE_5050,
-//   THE_7525,
-//   THE_875125
-// }
-
-// enum PokemonType {
-//   BUG,
-//   DARK,
-//   DRAGON,
-//   ELECTRIC,
-//   FAIRY,
-//   FIGHTING,
-//   FIRE,
-//   FLYING,
-//   GHOST,
-//   GRASS,
-//   GROUND,
-//   ICE,
-//   NORMAL,
-//   POISON,
-//   PSYCHIC,
-//   ROCK,
-//   STEEL,
-//   WATER
-// }
-
-import 'dart:core';
+String pokeModelToJson(PokeModel data) => json.encode(data.toJson());
 
 class PokeModel {
-  int? id;
-  Name? name;
-  List<String>? type;
-  Base? base;
-  String? species;
-  String? description;
-  Evolution? evolution;
-  Profile? profile;
-  Image? image;
+    final int id;
+    final Name name;
+    final List<String> type;
+    final Base base;
+    final String species;
+    final String description;
+    final Evolution evolution;
+    final Profile profile;
+    final Image image;
 
-  PokeModel(
-      {this.id,
-      this.name,
-      this.type,
-      this.base,
-      this.species,
-      this.description,
-      this.evolution,
-      this.profile,
-      this.image});
+    PokeModel({
+        required this.id,
+        required this.name,
+        required this.type,
+        required this.base,
+        required this.species,
+        required this.description,
+        required this.evolution,
+        required this.profile,
+        required this.image,
+    });
 
-  PokeModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'] != null ? new Name.fromJson(json['name']) : null;
-    type = json['type'].cast<String>();
-    base = json['base'] != null ? new Base.fromJson(json['base']) : null;
-    species = json['species'];
-    description = json['description'];
-    evolution = json['evolution'] != null
-        ? new Evolution.fromJson(json['evolution'])
-        : null;
-    profile =
-        json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
-    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
-  }
+    PokeModel copyWith({
+        int? id,
+        Name? name,
+        List<String>? type,
+        Base? base,
+        String? species,
+        String? description,
+        Evolution? evolution,
+        Profile? profile,
+        Image? image,
+    }) => 
+        PokeModel(
+            id: id ?? this.id,
+            name: name ?? this.name,
+            type: type ?? this.type,
+            base: base ?? this.base,
+            species: species ?? this.species,
+            description: description ?? this.description,
+            evolution: evolution ?? this.evolution,
+            profile: profile ?? this.profile,
+            image: image ?? this.image,
+        );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (name != null) {
-      data['name'] = name!.toJson();
-    }
-    data['type'] = type;
-    if (base != null) {
-      data['base'] = base!.toJson();
-    }
-    data['species'] = species;
-    data['description'] = description;
-    if (evolution != null) {
-      data['evolution'] = evolution!.toJson();
-    }
-    if (profile != null) {
-      data['profile'] = profile!.toJson();
-    }
-    if (image != null) {
-      data['image'] = image?.toJson();
-    }
-    return data;
-  }
-}
+    factory PokeModel.fromJson(Map<String, dynamic> json) => PokeModel(
+        id: json["id"],
+        name: Name.fromJson(json["name"]),
+        type: List<String>.from(json["type"].map((x) => x)),
+        base: Base.fromJson(json["base"]),
+        species: json["species"],
+        description: json["description"],
+        evolution: Evolution.fromJson(json["evolution"]),
+        profile: Profile.fromJson(json["profile"]),
+        image: Image.fromJson(json["image"]),
+    );
 
-class Name {
-  String? english;
-  String? japanese;
-  String? chinese;
-  String? french;
-
-  Name({this.english, this.japanese, this.chinese, this.french});
-
-  Name.fromJson(Map<String, dynamic> json) {
-    english = json['english'];
-    japanese = json['japanese'];
-    chinese = json['chinese'];
-    french = json['french'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['english'] = english;
-    data['japanese'] = japanese;
-    data['chinese'] = chinese;
-    data['french'] = french;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name.toJson(),
+        "type": List<dynamic>.from(type.map((x) => x)),
+        "base": base.toJson(),
+        "species": species,
+        "description": description,
+        "evolution": evolution.toJson(),
+        "profile": profile.toJson(),
+        "image": image.toJson(),
+    };
 }
 
 class Base {
-  int? hP;
-  int? attack;
-  int? defense;
-  int? spAttack;
-  int? spDefense;
-  int? speed;
+    final int hp;
+    final int attack;
+    final int defense;
+    final int spAttack;
+    final int spDefense;
+    final int speed;
 
-  Base(
-      {this.hP,
-      this.attack,
-      this.defense,
-      this.spAttack,
-      this.spDefense,
-      this.speed});
+    Base({
+        required this.hp,
+        required this.attack,
+        required this.defense,
+        required this.spAttack,
+        required this.spDefense,
+        required this.speed,
+    });
 
-  Base.fromJson(Map<String, dynamic> json) {
-    hP = json['HP'];
-    attack = json['Attack'];
-    defense = json['Defense'];
-    spAttack = json['Sp. Attack'];
-    spDefense = json['Sp. Defense'];
-    speed = json['Speed'];
-  }
+    Base copyWith({
+        int? hp,
+        int? attack,
+        int? defense,
+        int? spAttack,
+        int? spDefense,
+        int? speed,
+    }) => 
+        Base(
+            hp: hp ?? this.hp,
+            attack: attack ?? this.attack,
+            defense: defense ?? this.defense,
+            spAttack: spAttack ?? this.spAttack,
+            spDefense: spDefense ?? this.spDefense,
+            speed: speed ?? this.speed,
+        );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['HP'] = hP;
-    data['Attack'] = attack;
-    data['Defense'] = defense;
-    data['Sp. Attack'] = spAttack;
-    data['Sp. Defense'] = spDefense;
-    data['Speed'] = speed;
-    return data;
-  }
+    factory Base.fromJson(Map<String, dynamic> json) => Base(
+        hp: json["HP"],
+        attack: json["Attack"],
+        defense: json["Defense"],
+        spAttack: json["Sp. Attack"],
+        spDefense: json["Sp. Defense"],
+        speed: json["Speed"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "HP": hp,
+        "Attack": attack,
+        "Defense": defense,
+        "Sp. Attack": spAttack,
+        "Sp. Defense": spDefense,
+        "Speed": speed,
+    };
 }
 
 class Evolution {
-  List<List>? next;
+    final List<String> prev;
 
-  Evolution({this.next});
+    Evolution({
+        required this.prev,
+    });
 
-  Evolution.fromJson(Map<String, dynamic> json) {
-    if (json['next'] != null) {
-      // next = new List<List>();
-      next = [] as List<List<String>>;
-      json['next'].forEach((v) {
-        next!.add(v.toString().split(','));
-      });
-    }
-  }
+    Evolution copyWith({
+        List<String>? prev,
+    }) => 
+        Evolution(
+            prev: prev ?? this.prev,
+        );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (data['next'] != null) {
-      next = [];
-      // data['next'] = next?.map((v) => json.encode(v.split(','))).toList();
-      data['next'].forEach((v) => next!.add(v.split(',')));
-    }
-    return data;
-  }
-}
+    factory Evolution.fromJson(Map<String, dynamic> json) => Evolution(
+        prev: List<String>.from(json["prev"].map((x) => x)),
+    );
 
-class Next {
-  Next({key});
-
-  Next.fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
-  }
-}
-
-class Profile {
-  String? height;
-  String? weight;
-  List<String>? egg;
-  List<List>? ability;
-  String? gender;
-
-  Profile({this.height, this.weight, this.egg, this.ability, this.gender});
-
-  Profile.fromJson(Map<String, dynamic> json) {
-    height = json['height'];
-    weight = json['weight'];
-    egg = json['egg'].cast<String>();
-    if (json['ability'] != null) {
-      ability = [];
-      json['ability'].forEach((v) {
-        ability?.add(v.split(','));
-      });
-    }
-    gender = json['gender'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['height'] = height;
-    data['weight'] = weight;
-    data['egg'] = egg;
-    if (data['ability'] != null) {
-      ability = [];
-      // data['ability'] = ability?.map((v) => json.encode(v.split(','))).toList();
-      data['ability'].forEach((v) => ability!.add(v.split(',')));
-    }
-    data['gender'] = gender;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "prev": List<dynamic>.from(prev.map((x) => x)),
+    };
 }
 
 class Image {
-  String? sprite;
-  String? thumbnail;
-  String? hires;
+    final String sprite;
+    final String thumbnail;
+    final String hires;
 
-  Image({this.sprite, this.thumbnail, this.hires});
+    Image({
+        required this.sprite,
+        required this.thumbnail,
+        required this.hires,
+    });
 
-  Image.fromJson(Map<String, dynamic> json) {
-    sprite = json['sprite'];
-    thumbnail = json['thumbnail'];
-    hires = json['hires'];
-  }
+    Image copyWith({
+        String? sprite,
+        String? thumbnail,
+        String? hires,
+    }) => 
+        Image(
+            sprite: sprite ?? this.sprite,
+            thumbnail: thumbnail ?? this.thumbnail,
+            hires: hires ?? this.hires,
+        );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['sprite'] = sprite;
-    data['thumbnail'] = thumbnail;
-    data['hires'] = hires;
-    return data;
-  }
+    factory Image.fromJson(Map<String, dynamic> json) => Image(
+        sprite: json["sprite"],
+        thumbnail: json["thumbnail"],
+        hires: json["hires"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "sprite": sprite,
+        "thumbnail": thumbnail,
+        "hires": hires,
+    };
 }
 
+class Name {
+    final String english;
+    final String japanese;
+    final String chinese;
+    final String french;
+
+    Name({
+        required this.english,
+        required this.japanese,
+        required this.chinese,
+        required this.french,
+    });
+
+    Name copyWith({
+        String? english,
+        String? japanese,
+        String? chinese,
+        String? french,
+    }) => 
+        Name(
+            english: english ?? this.english,
+            japanese: japanese ?? this.japanese,
+            chinese: chinese ?? this.chinese,
+            french: french ?? this.french,
+        );
+
+    factory Name.fromJson(Map<String, dynamic> json) => Name(
+        english: json["english"],
+        japanese: json["japanese"],
+        chinese: json["chinese"],
+        french: json["french"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "english": english,
+        "japanese": japanese,
+        "chinese": chinese,
+        "french": french,
+    };
+}
+
+class Profile {
+    final String height;
+    final String weight;
+    final List<String> egg;
+    final List<List<String>> ability;
+    final String gender;
+
+    Profile({
+        required this.height,
+        required this.weight,
+        required this.egg,
+        required this.ability,
+        required this.gender,
+    });
+
+    Profile copyWith({
+        String? height,
+        String? weight,
+        List<String>? egg,
+        List<List<String>>? ability,
+        String? gender,
+    }) => 
+        Profile(
+            height: height ?? this.height,
+            weight: weight ?? this.weight,
+            egg: egg ?? this.egg,
+            ability: ability ?? this.ability,
+            gender: gender ?? this.gender,
+        );
+
+    factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+        height: json["height"],
+        weight: json["weight"],
+        egg: List<String>.from(json["egg"].map((x) => x)),
+        ability: List<List<String>>.from(json["ability"].map((x) => List<String>.from(x.map((x) => x)))),
+        gender: json["gender"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "height": height,
+        "weight": weight,
+        "egg": List<dynamic>.from(egg.map((x) => x)),
+        "ability": List<dynamic>.from(ability.map((x) => List<dynamic>.from(x.map((x) => x)))),
+        "gender": gender,
+    };
+}

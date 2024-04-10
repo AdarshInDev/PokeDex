@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:poke_dex/pages/pokemon_details_page.dart';
+import 'package:poke_dex/pages/pokemon_list.dart';
 
 void main() {
   runApp(const MaterialApp(
     title: 'PokeDex',
-    home: PokemonList(),
+    home: PokemonPage(),
     debugShowCheckedModeBanner: false,
   ));
 }
